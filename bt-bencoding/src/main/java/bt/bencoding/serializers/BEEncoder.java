@@ -42,6 +42,9 @@ public class BEEncoder {
     private static final Charset defaultCharset = StandardCharsets.UTF_8;
     private static final BEEncoder instance = new BEEncoder();
 
+    private BEEncoder() {
+    }
+
     /**
      * Get default encoder.
      *

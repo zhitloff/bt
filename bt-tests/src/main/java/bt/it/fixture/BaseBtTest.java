@@ -20,10 +20,8 @@ import bt.metainfo.MetadataService;
 import bt.metainfo.Torrent;
 import org.junit.BeforeClass;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URISyntaxException;
+import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -50,16 +48,11 @@ public class BaseBtTest {
     @BeforeClass
     public static void setUpClass() {
         try {
-            File singleFile = new File(FILE_URL.toURI());
-            byte[] content = new byte[(int) singleFile.length()];
-            try (FileInputStream fin = new FileInputStream(singleFile)) {
-                fin.read(content);
-            } catch (IOException e) {
-                throw new RuntimeException("Failed to read file: " + singleFile.getPath(), e);
+            try (InputStream input = FILE_URL.openStream()) {
+                SINGLE_FILE_CONTENT = input.readAllBytes();
             }
-            SINGLE_FILE_CONTENT = content;
-        } catch (URISyntaxException e) {
-            throw new RuntimeException("Unexpected error", e);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to read resource: " + FILE_NAME, e);
         }
     }
 

@@ -16,7 +16,7 @@
     <properties>
         <main.class>bt.cli.CliClient</main.class>
         <jopts-version>5.0.2</jopts-version>
-        <lanterna-version>3.1.1</lanterna-version>
+        <lanterna-version>3.1.2</lanterna-version>
     </properties>
 
     <build>
@@ -126,7 +126,7 @@
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j-impl</artifactId>
+            <artifactId>log4j-slf4j2-impl</artifactId>
             <version>${log4j-version}</version>
         </dependency>
     </dependencies>

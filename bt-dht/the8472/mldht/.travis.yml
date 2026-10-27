@@ -1,15 +1,10 @@
 language: java
 
-cache:
-  directories:
-  - $HOME/.m2
-  
 matrix:
   include:
-    - jdk: oraclejdk8
-    - sudo: false
-      dist: trusty
-      jdk: oraclejdk9
+    - os: linux
+      dist: focal
+      jdk: openjdk25
 
-before_install:
-  - export MAVEN_SKIP_RC=true
+script:
+  - mvn --batch-mode --no-transfer-progress clean verify

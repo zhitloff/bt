@@ -18,14 +18,14 @@ package bt.portmapping.upnp;
 
 import bt.service.IRuntimeLifecycleBinder;
 import bt.service.LifecycleBinding;
-import org.fourthline.cling.UpnpService;
-import org.fourthline.cling.UpnpServiceConfiguration;
-import org.fourthline.cling.UpnpServiceImpl;
-import org.fourthline.cling.support.igd.PortMappingListener;
-import org.fourthline.cling.support.model.PortMapping;
+import org.jupnp.UpnpService;
+import org.jupnp.UpnpServiceConfiguration;
+import org.jupnp.UpnpServiceImpl;
+import org.jupnp.support.igd.PortMappingListener;
+import org.jupnp.support.model.PortMapping;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 import static bt.service.IRuntimeLifecycleBinder.LifecycleEvent.SHUTDOWN;
 
@@ -52,7 +52,9 @@ public class UpnpPortMappingServicesRegistrar {
      * @param portMapping desired port mapping;
      */
     public void registerPortMapping(PortMapping portMapping) {
-        final UpnpService service = new UpnpServiceImpl(upnpServiceConfiguration, new PortMappingListener(portMapping));
+        final UpnpService service = new UpnpServiceImpl(upnpServiceConfiguration);
+        service.startup();
+        service.getRegistry().addListener(new PortMappingListener(portMapping));
         service.getControlPoint().search();
         bindShutdownHook(service);
     }

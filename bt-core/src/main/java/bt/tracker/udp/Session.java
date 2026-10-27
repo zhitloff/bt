@@ -31,9 +31,13 @@ class Session {
     private long id;
     private long createdOn;
 
-    public Session(long id) {
+    private Session(long id) {
         this.id = id;
         this.createdOn = System.currentTimeMillis();
+    }
+
+    static Session connected(long id) {
+        return new Session(id);
     }
 
     public boolean isExpired() {

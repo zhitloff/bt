@@ -30,7 +30,10 @@ class AnnounceResponseHandler implements UdpTrackerResponseHandler<TrackerRespon
     private static final int SEEDERS_OFFSET = 8;
     private static final int PEERS_OFFSET = 12;
 
-    private static AnnounceResponseHandler instance = new AnnounceResponseHandler();
+    private static final AnnounceResponseHandler instance = new AnnounceResponseHandler();
+
+    private AnnounceResponseHandler() {
+    }
 
     public static AnnounceResponseHandler handler() {
         return instance;

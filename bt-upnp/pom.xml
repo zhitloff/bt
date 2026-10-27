@@ -11,19 +11,9 @@
     <name>Bt UPnP</name>
     <description>Provides support for UPnP port mapping</description>
 
-    <repositories>
-        <repository>
-            <id>4thline-repo</id>
-            <url>http://4thline.org/m2</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
     <properties>
-        <cling.version>2.1.1</cling.version>
-        <jetty.version>8.2.0.v20160908</jetty.version>
+        <jupnp.version>3.0.3</jupnp.version>
+        <jetty.version>9.4.53.v20231009</jetty.version>
     </properties>
 
     <dependencies>
@@ -33,16 +23,15 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.fourthline.cling</groupId>
-            <artifactId>cling-core</artifactId>
-            <version>${cling.version}</version>
+            <groupId>org.jupnp</groupId>
+            <artifactId>org.jupnp</artifactId>
+            <version>${jupnp.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.fourthline.cling</groupId>
-            <artifactId>cling-support</artifactId>
-            <version>${cling.version}</version>
+            <groupId>org.jupnp</groupId>
+            <artifactId>org.jupnp.support</artifactId>
+            <version>${jupnp.version}</version>
         </dependency>
-        <!-- Jetty StreamClientImpl [http://4thline.org/projects/cling/core/manual/cling-core-manual.xhtml] #6.6 -->
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-client</artifactId>
@@ -50,20 +39,9 @@
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-http</artifactId>
+            <artifactId>jetty-server</artifactId>
             <version>${jetty.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-util</artifactId>
-            <version>${jetty.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-io</artifactId>
-            <version>${jetty.version}</version>
-        </dependency>
-        <!-- Jetty AsyncServletStreamServerImpl [http://4thline.org/projects/cling/core/manual/cling-core-manual.xhtml] #6.6 -->
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-servlet</artifactId>

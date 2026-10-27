@@ -38,6 +38,9 @@ class Choker {
     private static final Optional<Boolean> FALSE = Optional.of(Boolean.FALSE);
     private static final Optional<Boolean> TRUE = Optional.of(Boolean.TRUE);
 
+    private Choker() {
+    }
+
     /**
      * @return Choker instance
      * @since 1.0

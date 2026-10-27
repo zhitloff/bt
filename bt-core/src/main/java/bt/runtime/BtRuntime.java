@@ -91,7 +91,7 @@ public class BtRuntime {
     private final Object lock;
     private Thread hook;
 
-    private boolean manualShutdownOnly;
+    private volatile boolean manualShutdownOnly;
 
     BtRuntime(Injector injector, Config config) {
         this.injector = injector;

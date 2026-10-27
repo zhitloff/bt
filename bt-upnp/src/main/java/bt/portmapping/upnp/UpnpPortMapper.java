@@ -18,13 +18,13 @@ package bt.portmapping.upnp;
 
 import bt.net.portmapping.PortMapProtocol;
 import bt.net.portmapping.PortMapper;
-import org.fourthline.cling.support.model.PortMapping;
-import org.fourthline.cling.support.model.PortMapping.Protocol;
+import org.jupnp.support.model.PortMapping;
+import org.jupnp.support.model.PortMapping.Protocol;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * Maps network port on gateway device using UPNP service.

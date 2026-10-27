@@ -23,13 +23,16 @@ class ConnectResponseHandler implements UdpTrackerResponseHandler<Session> {
 
     private static final ConnectResponseHandler instance = new ConnectResponseHandler();
 
+    private ConnectResponseHandler() {
+    }
+
     public static ConnectResponseHandler handler() {
         return instance;
     }
 
     @Override
     public Session onSuccess(byte[] data) {
-        return new Session(Protocols.readLong(data, 0));
+        return Session.connected(Protocols.readLong(data, 0));
     }
 
     @Override

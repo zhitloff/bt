@@ -41,6 +41,7 @@ public class LRUBlockCache implements BlockCache {
     private final Map<TorrentId, ByteBuffer> buffers;
     private final Map<TorrentId, List<Slot>> lruSlots;
     private final Map<TorrentId, Map<Integer, Slot>> slotByPieceIndexMap;
+    private final Object blockReadLock = new Object();
 
     @Inject
     public LRUBlockCache(TorrentRegistry torrentRegistry, EventSource eventSource) {
@@ -209,7 +210,7 @@ public class LRUBlockCache implements BlockCache {
         return new BlockReader() {
             @Override
             public boolean readTo(ByteBuffer buffer) {
-                synchronized (LRUBlockCache.this) {
+                synchronized (blockReadLock) {
                     try {
                         if (buffer.remaining() < block.remaining()) {
                             return false;

@@ -34,6 +34,9 @@ public class GenericConsumer {
 
     private static final GenericConsumer instance = new GenericConsumer();
 
+    private GenericConsumer() {
+    }
+
     public static GenericConsumer consumer() {
         return instance;
     }

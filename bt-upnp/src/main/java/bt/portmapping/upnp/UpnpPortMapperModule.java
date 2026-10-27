@@ -19,7 +19,7 @@ package bt.portmapping.upnp;
 import bt.module.ServiceModule;
 import bt.portmapping.upnp.jetty.JettyAsyncUpnpServiceConfiguration;
 import com.google.inject.AbstractModule;
-import org.fourthline.cling.UpnpServiceConfiguration;
+import org.jupnp.UpnpServiceConfiguration;
 
 /**
  * @since 1.8

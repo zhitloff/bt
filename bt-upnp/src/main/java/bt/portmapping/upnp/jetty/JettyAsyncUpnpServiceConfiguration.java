@@ -16,13 +16,18 @@
 
 package bt.portmapping.upnp.jetty;
 
-import org.fourthline.cling.DefaultUpnpServiceConfiguration;
-import org.fourthline.cling.model.Namespace;
-import org.fourthline.cling.transport.spi.NetworkAddressFactory;
-import org.fourthline.cling.transport.spi.StreamClient;
-import org.fourthline.cling.transport.spi.StreamServer;
+import org.jupnp.DefaultUpnpServiceConfiguration;
+import org.jupnp.model.Namespace;
+import org.jupnp.transport.impl.ServletStreamServerConfigurationImpl;
+import org.jupnp.transport.impl.ServletStreamServerImpl;
+import org.jupnp.transport.impl.jetty.JettyServletContainer;
+import org.jupnp.transport.impl.jetty.JettyStreamClientImpl;
+import org.jupnp.transport.impl.jetty.StreamClientConfigurationImpl;
+import org.jupnp.transport.spi.NetworkAddressFactory;
+import org.jupnp.transport.spi.StreamClient;
+import org.jupnp.transport.spi.StreamServer;
 
-import javax.inject.Singleton;
+import com.google.inject.Singleton;
 
 @Singleton
 public class JettyAsyncUpnpServiceConfiguration extends DefaultUpnpServiceConfiguration {
@@ -34,18 +39,16 @@ public class JettyAsyncUpnpServiceConfiguration extends DefaultUpnpServiceConfig
 
     @Override
     public StreamClient createStreamClient() {
-        return new org.fourthline.cling.transport.impl.jetty.StreamClientImpl(
-                new org.fourthline.cling.transport.impl.jetty.StreamClientConfigurationImpl(
-                        getSyncProtocolExecutorService()
-                )
+        return new JettyStreamClientImpl(
+                new StreamClientConfigurationImpl(getSyncProtocolExecutorService())
         );
     }
 
     @Override
     public StreamServer createStreamServer(NetworkAddressFactory networkAddressFactory) {
-        return new org.fourthline.cling.transport.impl.AsyncServletStreamServerImpl(
-                new org.fourthline.cling.transport.impl.AsyncServletStreamServerConfigurationImpl(
-                        org.fourthline.cling.transport.impl.jetty.JettyServletContainer.INSTANCE,
+        return new ServletStreamServerImpl(
+                new ServletStreamServerConfigurationImpl(
+                        JettyServletContainer.INSTANCE,
                         networkAddressFactory.getStreamListenPort()
                 )
         );

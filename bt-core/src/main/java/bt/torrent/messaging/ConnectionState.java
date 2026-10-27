@@ -52,7 +52,7 @@ public class ConnectionState {
     private volatile long uploaded;
 
     private Optional<Boolean> shouldChoke;
-    private long lastChoked;
+    private volatile long lastChoked;
 
     private Set<Object> cancelledPeerRequests;
     private Set<Object> pendingRequests;

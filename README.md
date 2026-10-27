@@ -8,7 +8,7 @@
 
 <p align="center"><strong>
 <sup>
-A full-featured BitTorrent implementation in Java 8
+A full-featured BitTorrent implementation in Java 25
 <br/><a href="http://bittorrent.org/beps/bep_0011.html">peer exchange</a> | <a href="http://bittorrent.org/beps/bep_0009.html">magnet links</a> | <a href="http://bittorrent.org/beps/bep_0005.html">DHT</a> | <a href="http://wiki.vuze.com/w/Message_Stream_Encryption">encryption</a> | <a href="http://bittorrent.org/beps/bep_0014.html">LSD</a> | <a href="http://bittorrent.org/beps/bep_0027.html">private trackers</a> | <a href="http://bittorrent.org/beps/bep_0010.html">extended protocol</a> | <a href="#partial-downloads">partial downloads</a> | <a href="https://en.wikipedia.org/wiki/Internet_Gateway_Device_Protocol">port forwarding</a>
 </sup>
 </strong></p>
@@ -78,11 +78,13 @@ A full-featured BitTorrent implementation in Java 8
 
 ## Prerequisites
 
-<sup>Currently, all peer connections are established via [encryption negotation protocol](http://wiki.vuze.com/w/Message_Stream_Encryption) (also called MSE handshake). If you're using Oracle JDK ([pre 8u152](http://www.oracle.com/technetwork/java/javase/8u152-relnotes-3850503.html)), in order to be able to connect to peers you must install [Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy](http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html). The reason for this requirement is that the [MSE RC4 cipher](http://wiki.vuze.com/w/Message_Stream_Encryption) uses 160 bit keys, while default Java installation allows at most 128 bit keys.</sup>
+## Java compatibility
+
+This source tree requires Java 25 to compile and run. Peer connections use the [Message Stream Encryption (MSE) handshake](http://wiki.vuze.com/w/Message_Stream_Encryption); Java 25 includes unrestricted cryptographic policies by default, so no separate JCE policy installation is required. UPnP support is provided by [jUPnP](https://github.com/jupnp/jupnp), the maintained Cling fork, published in Maven Central.
 
 ## Usage
 
-Most recent version available in Maven Central is **1.10**.
+The currently documented release available in Maven Central is **1.10**. This source tree now builds for Java 25.
 
 Declare the following dependencies in your project’s **pom.xml**:
 
@@ -196,7 +198,7 @@ To allow you test the changes that you've made to the core, **Bt** ships with a 
 
 **Bt** has an API for selecting only a subset of torrent files to download. See the `bt.TorrentClientBuilder.fileSelector(TorrentFileSelector)` client builder method. File selection works for both `.torrent` file-based and magnet link downloads.
 
-### Java 8 CompletableFuture
+### Java CompletableFuture
 
 Client API leverages the asynchronous `java.util.concurrent.CompletableFuture` to provide the most natural way for co-ordinating multiple torrent sessions. E.g. use `CompletableFuture.allOf(client1.startAsync(...), client2.startAsync(...), ...).join()`. Or create a more sophisticated processing pipeline.
 
